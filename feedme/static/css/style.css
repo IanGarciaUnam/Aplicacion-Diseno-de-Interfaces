@@ -45,6 +45,11 @@ p {
   border-radius: 16px;
 }
 
+#reset-pass > div {
+  border: solid 3px black;
+  border-radius: 16px;
+}
+
 /* Páginas */
 
 /* Botones */
