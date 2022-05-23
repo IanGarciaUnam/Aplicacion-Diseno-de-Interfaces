@@ -3,6 +3,7 @@ from .views import HomeView
 from . import views
 
 urlpatterns = [
-    #path('', views.index, name='index'),
-    path('', HomeView.as_view(), name='index')
+    path('feedme', views.index, name='index'),
+    path('login', views.login, name='login'),
+    path('register', views.register, name='register')
 ]

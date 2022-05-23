@@ -8,4 +8,9 @@ class HomeView(TemplateView):
   
 def index(request):
   return render(request, 'seeker/index.html', {})
-  # return HttpResponse("Hello, world. You're at the polls index.")
+
+def login(request):
+  return render(request, 'seeker/login.html', {})
+
+def register(request):
+  return render(request, 'seeker/register.html', {})
