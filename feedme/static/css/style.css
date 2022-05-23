@@ -35,7 +35,17 @@ p {
   background-size: cover;
 }
 
+#reset-pass {
+  background: url("../img/bg-reset-pass.png") no-repeat center;
+  background-size: cover;
+}
+
 #login > div {
+  border: solid 3px black;
+  border-radius: 16px;
+}
+
+#reset-pass > div {
   border: solid 3px black;
   border-radius: 16px;
 }
