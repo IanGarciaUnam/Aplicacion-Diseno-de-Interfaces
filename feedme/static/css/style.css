@@ -30,6 +30,11 @@ p {
   background-size: cover;
 }
 
+#register {
+  background: url("../img/bg-register.png") no-repeat center;
+  background-size: cover;
+}
+
 #login > div {
   border: solid 3px black;
   border-radius: 16px;
