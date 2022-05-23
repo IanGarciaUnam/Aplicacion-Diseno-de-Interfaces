@@ -8,9 +8,12 @@ p {
   width: fit-content;
 }
 
-#header {
+#header,
+#footer {
   background-color: #F29D4B;
 }
+
+/* Páginas */
 
 #seeker {
   background: url("../img/bg-home.png") no-repeat center;
@@ -22,7 +25,25 @@ p {
   padding-bottom: 20px;
 }
 
+#login {
+  background: url("../img/bg-login.png") no-repeat center;
+  background-size: cover;
+}
+
+#register {
+  background: url("../img/bg-register.png") no-repeat center;
+  background-size: cover;
+}
+
+#login > div {
+  border: solid 3px black;
+  border-radius: 16px;
+}
+
+/* Páginas */
+
 /* Botones */
+
 .btn-blue {
   color: white;
   background-color: #1BA1E2;
@@ -34,3 +55,13 @@ p {
   background-color: #12709e;
   border-color: #1BA1E2;
 }
+ 
+.feedme-link {
+  color: #D57030;
+  text-decoration: none;
+}
+ 
+.feedme-link:hover {
+  color: #954E21;
+}
+/* Botones */
