@@ -8,4 +8,6 @@ urlpatterns = [
     path('register', views.register, name='register'),
     path('reset-pass', views.reset_pass, name='reset-pass'),
     path('results-nl', views.results_no_login, name='results-nl')
+
     ]
+
