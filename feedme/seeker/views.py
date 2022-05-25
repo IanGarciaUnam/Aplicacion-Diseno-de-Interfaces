@@ -16,7 +16,7 @@ def register(request):
   return render(request, 'seeker/register.html', {})
 
 def reset_pass(request):
-  return render(request, 'seeker/reset-pass.html', 
+  return render(request, 'seeker/reset-pass.html', {})
                 
 def results_no_login(request):
   return render(request, 'seeker/results-nl.html', {})
