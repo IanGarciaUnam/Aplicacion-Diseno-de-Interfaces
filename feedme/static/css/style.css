@@ -59,14 +59,14 @@ p {
 
 .btn-blue {
   color: white;
-  background-color: #1BA1E2;
-  border-color: #1BA1E2;
+  background-color: #6ECF59;
+  border-color: #6ECF59;
 }
 
 .btn-blue:hover {
   color: white;
-  background-color: #12709e;
-  border-color: #1BA1E2;
+  background-color: #3e7631;
+  border-color: #6ECF59;
 }
  
 .feedme-link {
