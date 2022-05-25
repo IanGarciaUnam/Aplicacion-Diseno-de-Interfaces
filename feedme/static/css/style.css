@@ -19,6 +19,9 @@ p {
   background: url("../img/bg-home.png") no-repeat center;
   background-size: cover;
 }
+#nl{
+  background-color:#D9DCD8;
+}
 
 #seeker > h1 {
   padding-top: 80px;
@@ -56,14 +59,14 @@ p {
 
 .btn-blue {
   color: white;
-  background-color: #1BA1E2;
-  border-color: #1BA1E2;
+  background-color: #6ECF59;
+  border-color: #6ECF59;
 }
 
 .btn-blue:hover {
   color: white;
-  background-color: #12709e;
-  border-color: #1BA1E2;
+  background-color: #3e7631;
+  border-color: #6ECF59;
 }
  
 .feedme-link {
@@ -74,4 +77,5 @@ p {
 .feedme-link:hover {
   color: #954E21;
 }
+
 /* Botones */
