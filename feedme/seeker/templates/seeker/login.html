@@ -1,0 +1,33 @@
+{% extends "base.html" %} 
+{% block content %}
+  <nav id="header" class="navbar navbar-expand-lg navbar-light border-bottom border-4 border-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/feedme">FeedMe</a>
+    </div>
+  </nav>
+
+  <div id="main" class="h-100">
+    <div id="login" class="container-fluid h-100 d-flex">
+      <div class="container px-5 pt-4 pb-5 align-self-center w-50 bg-white">
+        <h1 class="fw-bold mx-auto mb-4">INICIA SESIÓN</h1>
+        <form class="text-center">
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Correo electrónico</label>
+            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Contraseña</label>
+            <input type="password" class="form-control" id="exampleInputPassword1">
+          </div>
+          <div class="mb-3">
+            <a class="feedme-link" href="/reset-pass">¿Olvidaste tu contraseña?</a>
+          </div>
+          <div class="mb-3">
+            <p class="m-auto">¿No tienes cuenta? <a class="feedme-link" href="/register">Regístrate</a></p>
+          </div>
+          <button type="submit" class="btn btn-blue fw-bold mt-3">Iniciar Sesión</button>
+        </form>
+      </div>
+    </div>
+  </div>
+{% endblock content %}
