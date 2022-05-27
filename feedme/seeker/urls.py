@@ -11,4 +11,3 @@ urlpatterns = [
     path('receta', views.receta, name='receta')
 
     ]
-
