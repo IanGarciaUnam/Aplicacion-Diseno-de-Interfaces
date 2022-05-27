@@ -20,3 +20,7 @@ def reset_pass(request):
                 
 def results_no_login(request):
   return render(request, 'seeker/results-nl.html', {})
+
+def receta(request):
+  return render(request, 'seeker/receta.html', {})
+
