@@ -8,6 +8,9 @@ p {
   width: fit-content;
 }
 
+div.modal-header {
+  background-color:   background-color: #F29D4B;
+}
 #header,
 #footer {
   background-color: #F29D4B;
@@ -100,6 +103,11 @@ p {
 
 
 /* Botones */
+.card-buttons{
+    height: 500px;
+    width: 300px;
+
+}
 
 .container-action {
   background-color: rgba(255, 255, 255, 0.8);
