@@ -1,40 +1,45 @@
 {% extends "base.html" %}
 {% block content %}
-  <nav id="header" class="navbar navbar-expand-lg navbar-light border-bottom border-4 border-dark">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="/feedme">
-        {% load static %}
-        <img src="{% static 'dj_app/media/feedmeA.png' %}" alt="FeedMe" style="width:110px;height:42px;">
+<nav id="header" class="navbar navbar-expand-lg navbar-light border-bottom border-4 border-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/feedme">
+      {% load static %}
+      <img src="{% static 'dj_app/media/feedmeA.png' %}" alt="FeedMe" style="width:110px;height:42px;">
+    </a>
+    <span>
+      {% if request.user.is_staff %}
+      <a href="{% url 'logout' %}">
+        <button type="button" class="btn btn-green fw-bold">
+          Cerrar Sesión
+        </button>
       </a>
-      <span>
-
-
-
+      {% else %}
       <a href="{% url 'login' %}">
         <button type="button" class="btn btn-green fw-bold">
           Iniciar Sesión
         </button>
       </a>
+      {% endif %}
     </span>
-    </div>
-  </nav>
-  <div id="main" class="h-100">
-    <div id="seeker" class="container-fluid h-100">
-      <h1 class="text-white fw-bold mx-auto">Good Food Better Life</h1>
-      <p class="text-white mx-auto">Busca tu comida preferida</p>
-      <div class="row">
-        <div class="col">
-          <select class="form-select" aria-label="Default select example">
-            <option selected>Open this select menu</option>
-            <option value="1">índice Calórico</option>
-            <option value="2">Alimento</option>
-            <option value="3">Receta</option>
-          </select>
-        </div>
-        <div class="col">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        </div>
+  </div>
+</nav>
+<div id="main" class="h-100">
+  <div id="seeker" class="container-fluid h-100">
+    <h1 class="text-white fw-bold mx-auto">Good Food Better Life</h1>
+    <p class="text-white mx-auto">Busca tu comida preferida</p>
+    <div class="row">
+      <div class="col">
+        <select class="form-select" aria-label="Default select example">
+          <option selected>Open this select menu</option>
+          <option value="1">índice Calórico</option>
+          <option value="2">Alimento</option>
+          <option value="3">Receta</option>
+        </select>
+      </div>
+      <div class="col">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
       </div>
     </div>
   </div>
+</div>
 {% endblock content %}
