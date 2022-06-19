@@ -9,6 +9,7 @@ urlpatterns = [
     path('logout', views.logoutUser, name='logout'),
     path('reset-pass', views.reset_pass, name='reset-pass'),
     path('results-nl', views.results_no_login, name='results-nl'),
-    path('receta', views.receta, name='receta')
+    path('receta', views.receta, name='receta'),
+    path('esquema-tutor', views.esquema_tutor, name='esquema_tutor')
 
     ]

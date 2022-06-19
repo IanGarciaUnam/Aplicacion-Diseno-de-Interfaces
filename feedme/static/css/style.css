@@ -77,6 +77,10 @@ div.modal-header {
 }
 
 /* Páginas */
+.accordion-button:not(.collapsed) {
+    color: #CE281F;
+    background-color: #CE281F;
+}
 
 /* Botones */
 
