@@ -73,3 +73,6 @@ def receta(request):
 
 def esquema_tutor(request):
     return render(request, 'seeker/esquema-tutor.html', {})
+
+def esquema_ul(request):
+    return render(request, 'seeker/esquema-ul.html', {})
