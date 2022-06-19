@@ -70,3 +70,9 @@ def results_no_login(request):
 
 def receta(request):
     return render(request, 'seeker/receta.html', {})
+
+def esquema_tutor(request):
+    return render(request, 'seeker/esquema-tutor.html', {})
+
+def esquema_ul(request):
+    return render(request, 'seeker/esquema-ul.html', {})
