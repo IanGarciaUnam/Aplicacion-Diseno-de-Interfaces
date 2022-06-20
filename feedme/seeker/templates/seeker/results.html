@@ -26,6 +26,53 @@
   <div id="main" class="h-100 ">
 
     <!-- Modal HTML -->
+{% for alimento in alimentos%}
+<div id='{{alimento.nombre}}' class="modal fade" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: #F29D4B ;">
+                <h5 class="modal-title">{{alimento.nombre}}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <!-- Insert table-->
+                <div class="table-responsive sm">
+                  <table class="table">
+                    <tbody>
+                      <tr>
+                        <th scope="row">
+                          Calorías
+                        </th>
+                        <td>{{alimento.calorias}} cal</td>
+                      </tr>
+
+                      <tr>
+                        <th scope="row">
+                          Grasas
+                        </th>
+                        <td>{{alimento.grasas}} mcg</td>
+                      </tr>
+
+                      <tr>
+                        <th scope="row">
+                          Proteína
+                        </th>
+                        <td>{{alimento.proteina}} gr</td>
+                      </tr>
+                  </tbody>
+                      </table>
+                  </div>
+
+            </div>
+            <!--div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div-->
+        </div>
+    </div>
+</div>
+{% endfor %}
+
+
 <div id="modalCenter" class="modal fade" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -143,7 +190,7 @@
    {% for alimento in alimentos%}
           <tr>
           <td>   
-            <a href="#modalCenter" role="button" class="h-100
+            <a href='#{{alimento.nombre}}' role="button" class="h-100
         w-100  border border-secondary btn-lg btn-block card-button btn btn-light" data-bs-toggle="modal"> {{alimento.nombre|escape}}  </a>
       </td>
       </tr>       

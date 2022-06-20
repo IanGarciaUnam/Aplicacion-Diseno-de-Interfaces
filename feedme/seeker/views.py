@@ -101,7 +101,7 @@ def buscar(request):
 def results_no_login(request):
     alimentos=Alimento.objects.all()
     recetas=Receta.objects.all()
-    return render(request,'seeker/results-nl.html', {'alimentos': alimentos, "recetas":recetas})
+    return render(request,'seeker/results.html', {'alimentos': alimentos, "recetas":recetas})
 
 
 def receta(request):
