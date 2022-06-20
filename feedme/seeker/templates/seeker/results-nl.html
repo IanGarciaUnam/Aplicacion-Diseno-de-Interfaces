@@ -95,7 +95,16 @@
           
 
         <div class="col">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+
+          <form action="." method="GET">
+
+          <label for="buscar"></label>
+
+          <input class="form-control me-2
+          " type="search" name="buscar" placeholder="Search" aria-label="Search" value="{{query|escape}}">
+
+           </form>
+
         </div>
 
 <div class="table-responsive-lg table-borderless">
@@ -109,15 +118,36 @@
   <tbody>
 
 
-      
+
+{%if query%}
+<h2>Results for "{{query|escape}}"</h2>
+
+  {% if results %}
+        {% for result in results%}
+          <tr>
+          <td>   
+            <a href="#modalCenter" role="button" class="h-100
+        w-100  border border-secondary btn-lg btn-block card-button btn btn-light" data-bs-toggle="modal"> {{result|escape}}  </a>
+      </td>
+      </tr>       
+
+        {% endfor %}
+    {% else %}
+    <p>No results found</p>
+    {% endif %}
+  {% endif %}
 
 <tr>
 <td>   
 <a href="#modalCenter" role="button" class="h-100
         w-100  border border-secondary btn-lg btn-block card-button btn btn-light" data-bs-toggle="modal">Onion</a>
       </td>
-      <!--td>3</td--->
-       </tr>  
+      </tr>  
+
+<!----- TEST FOR RESULTS--->
+
+
+
  
     <tr>
     <td> 

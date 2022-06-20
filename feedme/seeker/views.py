@@ -10,6 +10,7 @@ from django.contrib.auth.decorators import login_required
 # Create your views here.
 from .models import *
 from .forms import CreateUserForm
+import requests
 
 
 class HomeView(TemplateView):
@@ -65,7 +66,13 @@ def reset_pass(request):
 
 
 def results_no_login(request):
-    return render(request, 'seeker/results-nl.html', {})
+    #key=request.GET.get('buscar','')
+    #print(key)
+    #response = requests.get('https://api.edamam.com/api/nutrition-data?app_id=c933683d&app_key=5eae2dcc11aa5945fbf7d51d849af20d&nutrition-type=cooking&ingr='+'buscar')
+    # Tranformamos la respuesta en un objeto JSON
+    #todos = response.json()
+    #print(todos)
+    return render(request, 'seeker/results-nl.html', {'results':todos})
 
 
 def receta(request):
