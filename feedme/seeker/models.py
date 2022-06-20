@@ -8,7 +8,7 @@ class Alimento(models.Model):
     grasas = models.FloatField(null=True)
     proteina = models.FloatField(null=True)
     fecha_creacion = models.DateTimeField(auto_now_add=True, null=True)
-    
+
     def __str__(self):
         return self.nombre
 
@@ -38,8 +38,8 @@ class Usuario(models.Model):
     recetas = models.ManyToManyField(Receta)
     fecha_creacion = models.DateTimeField(auto_now_add=True, null=True)
 
-    def __str__(self):
-        return self.name
+    def __user__(self):
+        return self.user
 
 
 class Tutor(models.Model):
@@ -47,6 +47,5 @@ class Tutor(models.Model):
     usuarios = models.ManyToManyField(Usuario)
     fecha_creacion = models.DateTimeField(auto_now_add=True, null=True)
 
-    def __str__(self):
-        return self.name
-
+    def __user__(self):
+        return self.user
