@@ -6,3 +6,6 @@ from .models import *
 
 admin.site.register(Alimento)
 admin.site.register(Receta)
+admin.site.register(Ingrediente)
+admin.site.register(Usuario)
+admin.site.register(Tutor)
