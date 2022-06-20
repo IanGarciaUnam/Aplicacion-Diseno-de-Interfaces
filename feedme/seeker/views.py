@@ -15,7 +15,8 @@ from .forms import CreateUserForm
 import requests
 from .decorators import usuario_no_autenticado, usuarios_permitidos
 from django.views.decorators.csrf import csrf_exempt, csrf_protect
-
+from django.db.models import Q
+#from django.shortcuts import render_to_response
 
 class HomeView(TemplateView):
     template_name = 'index.html'
@@ -77,16 +78,42 @@ def register(request):
 def reset_pass(request):
     return render(request, 'seeker/reset-pass.html', {})
 
-
-def results_no_login(request):
-    # key=request.GET.get('buscar','')
+def buscar(request):
+    query=request.GET.get('buscar','')
     # print(key)
     # response = requests.get('https://api.edamam.com/api/nutrition-data?app_id=c933683d&app_key=5eae2dcc11aa5945fbf7d51d849af20d&nutrition-type=cooking&ingr='+'buscar')
+    if query:
+        qset=(
+            Q(alimento__nombre__icontains=query))
+            #Q(alimento_nombre__icontains=query)|
+            #Q(receta__nombre__icontains=query))
+        results=Alimento.objects.filter(qset).distinct()
+    else:
+        results=[]
+    #response = requests.get('https://api.edamam.com/api/nutrition-data?app_id=c933683d&app_key=5eae2dcc11aa5945fbf7d51d849af20d&nutrition-type=cooking&ingr='+'buscar')
     # Tranformamos la respuesta en un objeto JSON
     # todos = response.json()
     # print(todos)
-    todos = {}
-    return render(request, 'seeker/results-nl.html', {'results': todos})
+    #todos = {}
+    return render(request,'seeker/results-nl.html', {'results': results, "query":query})
+    
+def results_no_login(request):
+    query=request.GET.get('buscar','')
+    # print(key)
+    if query:
+        qset=(
+            Q(alimento__nombre__icontains=query))
+            #Q(alimento_nombre__icontains=query)|
+            #Q(receta__nombre__icontains=query))
+        results=Alimento.objects.filter(qset).distinct()
+    else:
+        results=[]
+    #response = requests.get('https://api.edamam.com/api/nutrition-data?app_id=c933683d&app_key=5eae2dcc11aa5945fbf7d51d849af20d&nutrition-type=cooking&ingr='+'buscar')
+    # Tranformamos la respuesta en un objeto JSON
+    #todos = response.json()
+    # print(todos)
+    #todos = {}
+    return render(request,'seeker/results-nl.html', {'results': results, "query":query})
 
 
 def receta(request):
