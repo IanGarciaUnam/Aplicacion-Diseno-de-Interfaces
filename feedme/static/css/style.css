@@ -3,14 +3,20 @@ body {
   height: 100%;
 }
 
+body {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+}
+
 h1,
 p {
   width: fit-content;
 }
 
 div.modal-header {
-  background-color:   background-color: #F29D4B;
+  background-color: #F29D4B;
 }
+
 #header,
 #footer {
   background-color: #F29D4B;
@@ -19,23 +25,20 @@ div.modal-header {
 /* Páginas */
 
 #seeker {
-  background: url("../img/bg-home.png") no-repeat center;
+  background: url("../img/bg-home.png") no-repeat bottom;
   background-size: cover;
 }
-#nl{
-  background-color:#fcfcfc;
+
+#nl {
+  background-color: #fcfcfc;
 }
 
-#receta{
-   background-color:#fcfcfc;
-}
-#receta_values{
-   background-color:#D9DCD8;
+#receta {
+  background-color: #fcfcfc;
 }
 
-#seeker>h1 {
-  padding-top: 80px;
-  padding-bottom: 20px;
+#receta_values {
+  background-color: #D9DCD8;
 }
 
 #login {
@@ -70,7 +73,7 @@ div.modal-header {
   content: '\A';
   position: absolute;
   width: 100%;
-  height: 100%;
+  height: 90%;
   top: 60;
   left: 0;
   background: rgba(0, 0, 0, 0.6);
@@ -78,9 +81,10 @@ div.modal-header {
 
 /* Páginas */
 .accordion-button:not(.collapsed) {
-    color: #FFFFFF;
-    background-color: #6F6F6F;
+  color: #FFFFFF;
+  background-color: #6F6F6F;
 }
+
 
 /* Botones */
 
@@ -105,15 +109,92 @@ div.modal-header {
   color: #954E21;
 }
 
-
 /* Botones */
-.card-buttons{
-    height: 500px;
-    width: 300px;
+
+
+.card-buttons {
+  height: 500px;
+  width: 300px;
 
 }
 
 .container-action {
   background-color: rgba(255, 255, 255, 0.8);
   z-index: 1;
+}
+
+
+@media (min-width:320px) {
+  #seeker {
+    height: 300px;
+  }
+
+
+  /* Textos */
+
+  #seeker h1 {
+    padding-top: 80px;
+    padding-bottom: 10px;
+    font-size: 1.8em;
+  }
+
+  #seeker p {
+    font-size: 1em;
+  }
+
+  #invitacion-registro h2 {
+    font-size: 1.5em;
+  }
+
+  #invitacion-registro p {
+    font-size: 1em;
+  }
+
+  /* Textos */
+}
+
+@media (min-width:481px) {
+  /* portrait e-readers (Nook/Kindle), smaller tablets @ 600 or @ 640 wide. */
+}
+
+@media (min-width:641px) {
+  /* portrait tablets, portrait iPad, landscape e-readers, landscape 800x480 or 854x480 phones */
+}
+
+@media (min-width:961px) {
+  /* tablet, landscape iPad, lo-res laptops ands desktops */
+}
+
+@media (min-width:1025px) {
+  #seeker {
+    height: 600px;
+  }
+
+
+  /* Páginas */
+
+  /* Páginas */
+
+
+  /* Textos */
+
+  #seeker h1 {
+    padding-top: 80px;
+    padding-bottom: 20px;
+    font-size: 5em;
+  }
+
+  #seeker p {
+    font-size: 2em;
+  }
+
+  #invitacion-registro h2 {
+    font-size: 2em;
+  }
+
+  #invitacion-registro p {
+    font-size: 1.5em;
+  }
+
+  /* Textos */
 }

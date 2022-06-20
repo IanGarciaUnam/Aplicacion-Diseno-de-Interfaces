@@ -79,7 +79,15 @@ def receta(request):
     return render(request, 'seeker/receta.html', {})
 
 def esquema_tutor(request):
-    return render(request, 'seeker/esquema-tutor.html', {})
+    if request.user.is_authenticated:
+        # TODO: Validar que el usuario sea un tutor.
+        # TODO: Si sí, obtenemos sus usuarios.
+        usuarios = {}
+        context = {'usuarios': usuarios}
+        return render(request, 'seeker/esquema-tutor.html', context)
+    else:
+        return redirect('index')
+
 
 def esquema_ul(request):
     return render(request, 'seeker/esquema-ul.html', {})
