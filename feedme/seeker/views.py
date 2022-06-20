@@ -90,7 +90,22 @@ def results_no_login(request):
 
 
 def receta(request):
-    return render(request, 'seeker/receta.html', {})
+    titulo = 'No has especificado ninguna receta'
+    hayReceta = False
+    receta = None
+    calorias = 0
+    if request.method == 'GET' and request.GET.get('nombre') != None:
+        hayReceta = True
+        titulo = request.GET.get('nombre').replace('-', ' ')
+        # Obtenemos la receta.
+        receta = Receta.objects.get(nombre=titulo)
+        # Calculamos las calorías de acuerdo a las calorías de los almentos que contiene.
+        calorias = 0
+        for alimento in receta.alimento.all():
+            calorias += alimento.calorias
+
+    context = {'titulo': titulo, 'hayReceta': hayReceta, 'receta': receta, 'calorias': calorias}
+    return render(request, 'seeker/receta.html', context)
 
 
 @csrf_exempt
