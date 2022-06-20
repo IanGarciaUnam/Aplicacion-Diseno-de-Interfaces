@@ -1,19 +1,20 @@
 from unicodedata import name
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.views.generic import TemplateView
-from django.contrib.auth.forms import UserCreationForm
 
+from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login, logout
 
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import Group
+from django.contrib.auth.models import Group, User
 
 # Create your views here.
 from .models import *
 from .forms import CreateUserForm
 import requests
 from .decorators import usuario_no_autenticado, usuarios_permitidos
+from django.views.decorators.csrf import csrf_exempt, csrf_protect
 
 
 class HomeView(TemplateView):
@@ -53,7 +54,8 @@ def register(request):
         form = CreateUserForm(request.POST)
         if form.is_valid():
             usuario = form.save()
-            tipoUsuario = 'tutor' if request.POST.get('tipo-usuario') != None else 'usuario'
+            tipoUsuario = 'tutor' if request.POST.get(
+                'tipo-usuario') != None else 'usuario'
             grupo = Group.objects.get(name=tipoUsuario)
             usuario.groups.add(grupo)
             if tipoUsuario == 'tutor':
@@ -64,7 +66,7 @@ def register(request):
                 Usuario.objects.create(
                     user=usuario
                 )
-                
+
             return redirect('login')
 
     context = {'form': form}
@@ -91,17 +93,85 @@ def receta(request):
     return render(request, 'seeker/receta.html', {})
 
 
+@csrf_exempt
 @login_required(login_url='login')
 @usuarios_permitidos(roles_permitidos=['tutor'])
 def esquema_tutor(request):
-    if request.user.is_authenticated:
-        # TODO: Validar que el usuario sea un tutor.
-        # TODO: Si sí, obtenemos sus usuarios.
-        usuarios = {}
-        context = {'usuarios': usuarios}
-        return render(request, 'seeker/esquema-tutor.html', context)
-    else:
-        return redirect('index')
+    if request.method == 'POST':
+        accion = request.POST.get('accion')
+
+        if accion == 'mostrar-usuarios':
+            usuario = request.POST.get('usuario')
+            # Obtenemos los clientes del usuario.
+            clientesUsuario = Tutor.objects.get(user_id=usuario).usuarios.all()
+            # Obtenemos las usuarios que no son sus clientes.
+            usuarios = Usuario.objects.exclude(id__in=clientesUsuario)
+            # Guardamos la información que regresaremos.
+            data = {}
+            c = 0
+            for usr in usuarios:
+                data.update({c: {'nombre': usr.user.username, 'id': usr.id}})
+                c += 1
+            return JsonResponse({'data': data}, status=200)
+
+        if accion == 'agregar-cliente':
+            idCliente = request.POST.get('cliente')
+            idUsuario = request.POST.get('usuario')
+            # Obtenemos al usuario de la bd y al cliente que le agregaremos.
+            usuario = Tutor.objects.get(user_id=idUsuario)
+            u = Usuario.objects.get(id=idCliente)
+            # Agregamos al cliente.
+            usuario.usuarios.add(u)
+            # Obtenemos las recetas del nuevo cliente para poder atualizar el acordeón de clientes.
+            recetasUsuario = Usuario.objects.get(id=idCliente).recetas.all()
+            data = {}
+            c = 0
+            for receta in recetasUsuario:
+                data.update({c: {'nombre': receta.nombre, 'id': receta.id}})
+                c += 1
+            return JsonResponse({'data': data}, status=200)
+
+        if accion == 'mostrar-recetas':
+            usuario = request.POST.get('usuario')
+            # Obtenemos al usuario de la bd.
+            id = User.objects.get(username=usuario).id
+            # Obtenemos sus recetas
+            recetasUsuario = Usuario.objects.get(user_id=id).recetas.all()
+            # Obtenemos las recetas que le faltan.
+            recetas = Receta.objects.exclude(id__in=recetasUsuario)
+            # Guardamos la información que regresaremos.
+            data = {}
+            c = 0
+            for receta in recetas:
+                data.update({c: {'nombre': receta.nombre, 'id': receta.id}})
+                c += 1
+            return JsonResponse({'data': data}, status=200)
+
+        if accion == 'agregar-receta':
+            usuario = request.POST.get('usuario')
+            receta = request.POST.get('receta')
+            # Obtenemos al usuario de la bd y la receta que le agregaremos.
+            idUsuario = User.objects.get(username=usuario).id
+            usuario = Usuario.objects.get(user_id=idUsuario)
+            r = Receta.objects.get(id=receta)
+            # Agregamos la receta.
+            usuario.recetas.add(r)
+            return JsonResponse({}, status=200)
+
+        if accion == 'eliminar-receta':
+            idUsuario = request.POST.get('usuario')
+            receta = request.POST.get('receta')
+            # Obtenemos al usuario de la bd y la receta que le quitaremos.
+            usuario = Usuario.objects.get(id=idUsuario)
+            r = Receta.objects.get(id=receta)
+            # Eliminamos la receta.
+            usuario.recetas.remove(r)
+            return JsonResponse({}, status=200)
+
+    usuarios = Tutor.objects.get(user_id=request.user.id).usuarios.all()
+    context = {'usuarios': usuarios}
+
+    return render(request, 'seeker/esquema-tutor.html', context)
 
 
 @login_required(login_url='login')

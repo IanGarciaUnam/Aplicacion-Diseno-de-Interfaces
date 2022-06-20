@@ -1,148 +1,253 @@
-<html lang="en">
+{% extends "base.html" %}
+{% block content %}
+<div id="main" class="h-100 ">
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FeedMe</title>
-  <!-- Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-    crossorigin="anonymous"></script>
-  <link rel="stylesheet" type="text/css" href="/static/css/style.css">
-</head>
+  <h1 class="fw-bold m-auto p-5">Tus Clientes</h1>
 
-<body>
-
-  <nav id="header" class="navbar navbar-expand-lg navbar-light border-bottom border-4 border-dark">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="/feedme">
-        {% load static %}
-        <img src="{% static 'dj_app/media/feedmeA.png' %}" alt="FeedMe" style="width:110px;height:42px;">
-      </a>
-      <a href="/login">
-
-        <button type="button" class="btn btn-green fw-bold">
-          Iniciar Sesión
-        </button>
-      </a>
-    </div>
-  </nav>
-  <div id="main" class="h-100 ">
-
-    <!-- Modal HTML -->
-    <div id="modalCenter" class="modal fade" tabindex="-1">
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-          <div class="modal-header" style="background-color: #F29D4B ;">
-            <h5 class="modal-title">Recetas</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+  <!-- Modal HTML -->
+  <div id="modal-recetas" class="modal fade" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header" style="background-color: #F29D4B ;">
+          <h5 class="modal-title">Recetas</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <!-- Insert table-->
+          <div class="table-responsive sm">
+            <table id="tabla-recetas" class="table" style="text-align:center;">
+              <tbody>
+              </tbody>
+            </table>
           </div>
-          <div class="modal-body">
-            <!-- Insert table-->
-            <div class="table-responsive sm">
-              <table id="pag1" class="table" style="text-align:center;">
-                <tbody>
-                  <!-- {% for usuario in usuarios %} -->
-                  <tr>
-                    <th scope="row">
-                      Receta 1
-                    </th>
-                  </tr>
-                  <!-- {% endfor %} -->
-
-                  <tr>
-                    <th scope="row">
-                      Receta 2
-                    </th>
-                  </tr>
-
-                  <tr>
-                    <th scope="row">
-                      Receta 3
-                    </th>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-
-          </div>
-          <!--div class="modal-footer">
-               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-           </div-->
         </div>
       </div>
     </div>
+  </div>
 
-    <br />
-    <br />
-
-    <div id="nl" class="container-fluid h-100 w-75">
-
-      <div class="accordion-responsive-lg" id="accordionExample">
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="headingOne">
-            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
-              aria-expanded="true" aria-controls="collapseOne">
-              Usuario 1
-            </button>
-          </h2>
-          <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
-            data-bs-parent="#accordionExample">
-            <div class="accordion-body">
-              <ul>
-                <li>Coffee</li>
-                <li>Tea</li>
-                <li>Milk</li>
-              </ul>
-              <a href="#modalCenter" role="button" class="btn btn-green" data-bs-toggle="modal">Agregar</a>
-
-            </div>
-          </div>
+  <div id="modal-usuarios" class="modal fade" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header" style="background-color: #F29D4B ;">
+          <h5 class="modal-title">Usuarios</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
         </div>
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="headingTwo">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-              data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-              Usuario 2
-            </button>
-          </h2>
-          <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
-            data-bs-parent="#accordionExample">
-            <div class="accordion-body">
-              <ul>
-                <li>Coffee</li>
-                <li>Tea</li>
-                <li>Milk</li>
-              </ul>
-              <a href="#modalCenter" role="button" class="btn btn-green" data-bs-toggle="modal">Agregar</a>
-
-
-            </div>
-          </div>
-        </div>
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="headingThree">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-              data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-              Usuario 3
-            </button>
-          </h2>
-          <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
-            data-bs-parent="#accordionExample">
-            <div class="accordion-body">
-              <ul>
-                <li>Coffee</li>
-                <li>Tea</li>
-                <li>Milk</li>
-              </ul>
-              <a href="#modalCenter" role="button" class="btn btn-green" data-bs-toggle="modal">Agregar</a>
-            </div>
+        <div class="modal-body">
+          <!-- Insert table-->
+          <div class="table-responsive sm">
+            <table id="tabla-usuarios" class="table" style="text-align:center;">
+              <tbody>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
+    </div>
+  </div>
 
-</body>
+  <div id="nl" class="container-fluid w-75">
+    <div class="text-end my-3">
+      <a href="#modal-usuarios" role="button" id="btn-agregar-cliente" class="btn btn-green"
+        data-usuario="{{ request.user.id}}" data-bs-toggle="modal">
+        Agregar Cliente
+      </a>
+    </div>
+    <div class="accordion-responsive-lg" id="acordeon-usuarios">
+      {% for usuario in usuarios %}
+      <div class="accordion-item" data-usuario="{{ usuario.id }}">
+        <h2 class="accordion-header" id="heading-{{ forloop.counter	}}">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+            data-bs-target="#collapse-{{ forloop.counter }}" aria-expanded="true"
+            aria-controls="collapse-{{ forloop.counter }}">
+            {{ usuario.user }}
+          </button>
+        </h2>
+        <div id="collapse-{{ forloop.counter }}" class="accordion-collapse collapse"
+          aria-labelledby="heading-{{ forloop.counter	}}" data-bs-parent="#acordeon-usuarios">
+          <div class="accordion-body">
+            <h4>Recetas</h4>
+            <ul>
+              {% for receta in usuario.recetas.all %}
+              <li>
+                <div class="row">
+                  <div class="col-auto align-self-center">
+                    {{ receta.nombre }}
+                  </div>
+                  <div class="col-auto">
+                    <button type="button" class="btn eliminar-receta" data-receta="{{ receta.id }}">
+                      <i class="fa-solid fa-trash"></i>
+                    </button>
+                  </div>
+                </div>
+              </li>
+              {% endfor %}
+            </ul>
+            <a href="#modal-recetas" role="button" class="btn btn-green btn-agregar-receta"
+              data-usuario="{{ usuario.user }}" data-bs-toggle="modal">Agregar</a>
 
-</html>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+<script>
+  $(document).ready(function () {
+
+    // Eliminamos la receta de las recetas del usuario.
+    $(document).on('click', '.eliminar-receta', function () {
+      let btn = $(this);
+      $.post("/esquema-tutor", {
+        'accion': 'eliminar-receta',
+        'usuario': btn.parents('.accordion-item').data('usuario'),
+        'receta': btn.data('receta'),
+      }, function (res) {
+        btn.parents('li').remove();
+      });
+    });
+
+    // Obtenemos las recetas que no tiene el usuario enviado para mostrarlas en la modal.
+    $(document).on('click', '.btn-agregar-receta', function () {
+      let btn = $(this);
+      $.post("/esquema-tutor", {
+        'accion': 'mostrar-recetas',
+        'usuario': btn.data('usuario')
+      }, function (res) {
+        let recetas = res.data;
+        let numRecetas = Object.keys(recetas).length;
+        // Actualizamos las recetas que se pueden agregar.
+        $('#tabla-recetas').find('tbody').html('');
+        for (let i = 0; i < numRecetas; i++) {
+          let receta = recetas[i];
+          $('#tabla-recetas').find('tbody').append(
+            '<tr class="agregar-receta" data-id-receta="' + receta.id + '" data-nombre-receta="' + receta.nombre + '">' +
+            '<th scope="row">' +
+            receta.nombre +
+            '</th>' +
+            '</tr>'
+          );
+        }
+      }).done(function () {
+        // Agregamos la receta a las recetas del usuario.
+        $('.agregar-receta').one('click', function () {
+          let receta = $(this);
+          let idReceta = receta.data('id-receta');
+          let nombreReceta = receta.data('nombre-receta');
+          $.post("/esquema-tutor", {
+            'accion': 'agregar-receta',
+            'receta': idReceta,
+            'usuario': btn.data('usuario')
+          }, function (res) {
+            let recetas = btn.parents('.accordion-body').find('ul');
+            recetas.append(
+              '<li>' +
+              '<div class="row">' +
+              '<div class="col-auto align-self-center">' +
+              nombreReceta +
+              '</div>' +
+              '<div class="col-auto">' +
+              '<button type="button" class="btn eliminar-receta" data-receta="' + idReceta + '">' +
+              '<i class="fa-solid fa-trash"></i>' +
+              '</button>' +
+              '</div>' +
+              '</div>' +
+              '</li>'
+            );
+            $('.btn-close').click();
+          });
+          return false; //<---- move it here
+        });
+      });
+      return false; //<---- move it here
+    });
+
+
+    // Obtenemos los usuarios que no tiene el usuario actual como clientes para mostrarlos en la modal.
+    $(document).on('click', '#btn-agregar-cliente', function () {
+      let btn = $(this);
+      $.post("/esquema-tutor", {
+        'accion': 'mostrar-usuarios',
+        'usuario': btn.data('usuario')
+      }, function (res) {
+        let usuarios = res.data;
+        let numUsuarios = Object.keys(usuarios).length;
+        // Actualizamos los usuarios que se pueden agregar.
+        $('#tabla-usuarios').find('tbody').html('');
+        for (let i = 0; i < numUsuarios; i++) {
+          let usuario = usuarios[i];
+          $('#tabla-usuarios').find('tbody').append(
+            '<tr class="agregar-usuario" data-id-usuario="' + usuario.id + '" data-nombre-usuario="' + usuario.nombre + '">' +
+            '<th scope="row">' +
+            usuario.nombre +
+            '</th>' +
+            '</tr>'
+          );
+        }
+      }).done(function () {
+        // Agregamos el usuario a los clientes del usuario.
+        $('.agregar-usuario').one('click', function () {
+          let usuario = $(this);
+          let idUsuario = usuario.data('id-usuario');
+          let nombreUsuario = usuario.data('nombre-usuario');
+          $.post("/esquema-tutor", {
+            'accion': 'agregar-cliente',
+            'cliente': idUsuario,
+            'usuario': btn.data('usuario')
+          }, function (res) {
+            let recetas = res.data;
+            let numRecetas = Object.keys(recetas).length;
+            let recetasHtml = '';
+            for (let i = 0; i < numRecetas; i++) {
+              let receta = recetas[i];
+              recetasHtml += 
+                '<li>' +
+                  '<div class="row">' +
+                    '<div class="col-auto align-self-center">' +
+                      receta.nombre +
+                    '</div>' +
+                    '<div class="col-auto">' +
+                      '<button type="button" class="btn eliminar-receta" data-receta="' + receta.id + '">' +
+                        '<i class="fa-solid fa-trash"></i>' +
+                      '</button>' +
+                    '</div>' +
+                  '</div>' +
+                '</li>'
+            }            
+
+            let clientes = btn.parent().next();
+            let indice = clientes.children().length + 1;
+            clientes.append(
+              '<div class="accordion-item" data-usuario="' + idUsuario + '">' +
+                '<h2 class="accordion-header" id="heading-' + indice + '">' +
+                  '<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"' +
+                    'data-bs-target="#collapse-' + indice + '" aria-expanded="true"' +
+                    'aria-controls="collapse-' + indice + '">' +
+                    nombreUsuario +
+                  '</button>' +
+                '</h2>' +
+                '<div id="collapse-' + indice + '" class="accordion-collapse collapse"' +
+                  'aria-labelledby="heading-' + indice + '" data-bs-parent="#acordeon-usuarios">' +
+                  '<div class="accordion-body">' +
+                    '<h4>Recetas</h4>' +
+                    '<ul>' +
+                      recetasHtml +
+                    '</ul>' +
+                    '<a href="#modal-recetas" role="button" class="btn btn-green btn-agregar-receta" data-usuario="' + nombreUsuario + '"' +
+                      'data-bs-toggle="modal">Agregar</a>' +
+                  '</div>' +
+                '</div>' +
+              '</div>'
+            );
+            $('.btn-close').click();
+          });
+          return false; //<---- move it here
+        });
+      });
+      return false; //<---- move it here
+    });
+
+  });
+</script>
+{% endblock content %}

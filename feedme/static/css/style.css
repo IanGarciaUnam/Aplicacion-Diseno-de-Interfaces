@@ -111,6 +111,15 @@ div.modal-header {
   color: #954E21;
 }
 
+.eliminar-receta {
+  all: initial;
+  cursor: pointer;
+}
+
+.eliminar-receta:hover {
+  color: #F29D4B;
+}
+
 #btn-menu-usuario {
   padding: 0;
   margin: 8px 16px;
@@ -131,6 +140,15 @@ div.modal-header {
 
 /* Botones */
 
+
+/* Elementos */
+
+.agregar-receta:hover,
+.agregar-usuario:hover {
+  background-color: lightgreen;
+  cursor: pointer;
+}
+
 #menu-usuario {
   width: 300px;
 }
@@ -138,13 +156,15 @@ div.modal-header {
 .card-buttons {
   height: 500px;
   width: 300px;
-
+  
 }
 
 .container-action {
   background-color: rgba(255, 255, 255, 0.8);
   z-index: 1;
 }
+
+/* Elementos */
 
 
 @media (min-width:320px) {
