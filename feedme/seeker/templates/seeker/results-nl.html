@@ -137,47 +137,61 @@
     {% endif %}
   {% endif %}
 
-<tr>
-<td>   
-<a href="#modalCenter" role="button" class="h-100
-        w-100  border border-secondary btn-lg btn-block card-button btn btn-light" data-bs-toggle="modal">Onion</a>
-      </td>
-      </tr>  
 
 <!----- TEST FOR RESULTS--->
 
+   {% for alimento in alimentos%}
+          <tr>
+          <td>   
+            <a href="#modalCenter" role="button" class="h-100
+        w-100  border border-secondary btn-lg btn-block card-button btn btn-light" data-bs-toggle="modal"> {{alimento.nombre|escape}}  </a>
+      </td>
+      </tr>       
+
+        {% endfor %}
+
+ {% for receta in recetas%}
+          <tr>
+          <td>   
+            <a href="#modalCenter" role="button" class="h-100
+        w-100  border border-secondary btn-lg btn-block card-button btn btn-light" data-bs-toggle="modal"> {{receta.nombre|escape}}  </a>
+      </td>
+      </tr>       
+
+        {% endfor %}
 
 
  
-    <tr>
+    <!--tr>
     <td> 
       
     <a href="#modalCenter" role="button" class="h-100
         w-100  border border-secondary btn-lg btn-block card-button btn btn-light" data-bs-toggle="modal">Pinneaple</a>
 
     </td>
+     </tr-->
+
       <!---td>5</td-->
-    </tr>
+   
 
-
-    <tr>
+    <!--tr>
       <td>
 
 <a href="#modalCenter" role="button" class="h-100
         w-100  border border-secondary btn-lg btn-block card-button btn btn-light" data-bs-toggle="modal">Boiled Egg</a>
       </td>
-      </tr>
-<tr>      <!----td>120</td-->
+      </tr-->
+<!--tr>      
 <td>
 <a href="#modalCenter" role="button" class="h-100
         w-100  border border-secondary btn-lg btn-block card-button btn btn-light" data-bs-toggle="modal">Pear</a>
-      </td>
-    <tr>
+      </td-->
+    <!--tr>
       <td>
 <a href="#modalCenter" role="button" class="h-100
         w-100  border border-secondary btn-lg btn-block card-button btn btn-light" data-bs-toggle="modal">Apple</a>
       </td>
-    </tr>
+    </tr-->
   </tbody>
 </table>
 

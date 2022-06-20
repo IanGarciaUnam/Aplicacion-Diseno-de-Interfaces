@@ -4,11 +4,6 @@ from . import views
 
 urlpatterns = [
     path('', views.index, name='index'),
-<<<<<<< HEAD
-    path('results-nl', views.results_no_login, name='/?buscar={{x}}'),
-=======
-    path('results-nl', views.buscar, name='/?buscar='),
->>>>>>> main
     path('register', views.register, name='register'),
     path('login', views.loginPage, name='login'),
     path('logout', views.logoutUser, name='logout'),

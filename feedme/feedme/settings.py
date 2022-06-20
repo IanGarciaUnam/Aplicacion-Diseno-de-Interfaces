@@ -39,7 +39,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'seeker.apps.SeekerConfig',
-    'django_filters',
 ]
 
 MIDDLEWARE = [
