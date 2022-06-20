@@ -17,7 +17,7 @@ from .decorators import usuario_no_autenticado, usuarios_permitidos
 from django.views.decorators.csrf import csrf_exempt, csrf_protect
 from django.db.models import Q
 #from django.shortcuts import render_to_response
-
+from .filters import OrderFilter
 class HomeView(TemplateView):
     template_name = 'index.html'
 
@@ -80,6 +80,7 @@ def reset_pass(request):
 
 def buscar(request):
     query=request.GET.get('buscar','')
+    results=Alimento.objects.all()
     # print(key)
     # response = requests.get('https://api.edamam.com/api/nutrition-data?app_id=c933683d&app_key=5eae2dcc11aa5945fbf7d51d849af20d&nutrition-type=cooking&ingr='+'buscar')
     if query:
@@ -98,7 +99,9 @@ def buscar(request):
     return render(request,'seeker/results-nl.html', {'results': results, "query":query})
     
 def results_no_login(request):
+    """
     query=request.GET.get('buscar','')
+    results=Alimento.objects.all()
     # print(key)
     if query:
         qset=(
@@ -113,6 +116,9 @@ def results_no_login(request):
     #todos = response.json()
     # print(todos)
     #todos = {}
+    """
+    #myFilter = OrderFilter(request.GET)
+
     return render(request,'seeker/results-nl.html', {'results': results, "query":query})
 
 
