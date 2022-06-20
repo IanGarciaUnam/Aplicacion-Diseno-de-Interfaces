@@ -2,3 +2,4 @@
 /feedme/seeker/__pycache__/*
 /feedme/seeker/migrations/__pycache__/*
 /consume_api/*
+consume_api/*

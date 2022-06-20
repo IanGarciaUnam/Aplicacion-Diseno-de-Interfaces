@@ -6,7 +6,7 @@
     </a>
     {% if request.path != "/register" and request.path != "/login" and request.path != "/reset-pass" %}
     <span>
-      {% if request.user.is_staff %}
+      {% if request.user.is_authenticated %}
       <a href="{% url 'logout' %}">
         <button type="button" class="btn btn-green fw-bold">
           Cerrar Sesión
