@@ -80,6 +80,8 @@ div.modal-header {
 }
 
 /* Páginas */
+
+
 .accordion-button:not(.collapsed) {
   color: #FFFFFF;
   background-color: #6F6F6F;
@@ -109,8 +111,29 @@ div.modal-header {
   color: #954E21;
 }
 
+#btn-menu-usuario {
+  padding: 0;
+  margin: 8px 16px;
+}
+
+#btn-menu-usuario::after {
+  content: unset;
+}
+
+#btn-menu-usuario button {
+  color: #F29D4B;
+  background-color: black;
+}
+
+#btn-menu-usuario button:hover {
+  opacity: .8;
+}
+
 /* Botones */
 
+#menu-usuario {
+  width: 300px;
+}
 
 .card-buttons {
   height: 500px;
@@ -169,7 +192,6 @@ div.modal-header {
   #seeker {
     height: 600px;
   }
-
 
   /* Páginas */
 
