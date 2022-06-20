@@ -22,6 +22,9 @@ class Receta(models.Model):
     def __str__(self):
         return self.nombre
 
+    def url_readable_title(self):
+        return self.nombre.replace(' ', '-')
+
 
 class Ingrediente(models.Model):
     receta = models.ManyToManyField(Receta)

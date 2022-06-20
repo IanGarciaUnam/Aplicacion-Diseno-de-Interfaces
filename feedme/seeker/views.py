@@ -17,7 +17,11 @@ from .decorators import usuario_no_autenticado, usuarios_permitidos
 from django.views.decorators.csrf import csrf_exempt, csrf_protect
 from django.db.models import Q
 #from django.shortcuts import render_to_response
+<<<<<<< HEAD
 
+=======
+from .filters import OrderFilter
+>>>>>>> main
 class HomeView(TemplateView):
     template_name = 'index.html'
 
@@ -80,7 +84,33 @@ def reset_pass(request):
 
 def buscar(request):
     query=request.GET.get('buscar','')
+<<<<<<< HEAD
     # print(key)
+=======
+    results=Alimento.objects.all()
+    # print(key)
+    # response = requests.get('https://api.edamam.com/api/nutrition-data?app_id=c933683d&app_key=5eae2dcc11aa5945fbf7d51d849af20d&nutrition-type=cooking&ingr='+'buscar')
+    if query:
+        qset=(
+            Q(alimento__nombre__icontains=query))
+            #Q(alimento_nombre__icontains=query)|
+            #Q(receta__nombre__icontains=query))
+        results=Alimento.objects.filter(qset).distinct()
+    else:
+        results=[]
+    #response = requests.get('https://api.edamam.com/api/nutrition-data?app_id=c933683d&app_key=5eae2dcc11aa5945fbf7d51d849af20d&nutrition-type=cooking&ingr='+'buscar')
+    # Tranformamos la respuesta en un objeto JSON
+    # todos = response.json()
+    # print(todos)
+    #todos = {}
+    return render(request,'seeker/results-nl.html', {'results': results, "query":query})
+    
+def results_no_login(request):
+    """
+    query=request.GET.get('buscar','')
+    results=Alimento.objects.all()
+    # print(key)
+>>>>>>> main
     if query:
         qset=(
             Q(alimento__nombre__icontains=query))
@@ -94,6 +124,7 @@ def buscar(request):
     #todos = response.json()
     # print(todos)
     #todos = {}
+<<<<<<< HEAD
     return render(request,'seeker/results-nl.html', {'results': results, "query":query})
     
 def results_no_login(request):
@@ -112,6 +143,11 @@ def results_no_login(request):
     #todos = response.json()
     # print(todos)
     #todos = {}
+=======
+    """
+    #myFilter = OrderFilter(request.GET)
+
+>>>>>>> main
     return render(request,'seeker/results-nl.html', {'results': results, "query":query})
 
 
@@ -121,86 +157,93 @@ def receta(request):
 
 @csrf_exempt
 @login_required(login_url='login')
-@usuarios_permitidos(roles_permitidos=['tutor'])
-def esquema_tutor(request):
-    if request.method == 'POST':
-        accion = request.POST.get('accion')
+@usuarios_permitidos(roles_permitidos=['tutor', 'usuario'])
+def esquema(request):
+    grupo = request.user.groups.all()[0].name
+    context = {'grupo': grupo}
+    if grupo == 'tutor':
+        if request.method == 'POST':
+            accion = request.POST.get('accion')
 
-        if accion == 'mostrar-usuarios':
-            usuario = request.POST.get('usuario')
-            # Obtenemos los clientes del usuario.
-            clientesUsuario = Tutor.objects.get(user_id=usuario).usuarios.all()
-            # Obtenemos las usuarios que no son sus clientes.
-            usuarios = Usuario.objects.exclude(id__in=clientesUsuario)
-            # Guardamos la información que regresaremos.
-            data = {}
-            c = 0
-            for usr in usuarios:
-                data.update({c: {'nombre': usr.user.username, 'id': usr.id}})
-                c += 1
-            return JsonResponse({'data': data}, status=200)
+            if accion == 'mostrar-usuarios':
+                usuario = request.POST.get('usuario')
+                # Obtenemos los clientes del usuario.
+                clientesUsuario = Tutor.objects.get(
+                    user_id=usuario).usuarios.all()
+                # Obtenemos las usuarios que no son sus clientes.
+                usuarios = Usuario.objects.exclude(id__in=clientesUsuario)
+                # Guardamos la información que regresaremos.
+                data = {}
+                c = 0
+                for usr in usuarios:
+                    data.update(
+                        {c: {'nombre': usr.user.username, 'id': usr.id}})
+                    c += 1
+                return JsonResponse({'data': data}, status=200)
 
-        if accion == 'agregar-cliente':
-            idCliente = request.POST.get('cliente')
-            idUsuario = request.POST.get('usuario')
-            # Obtenemos al usuario de la bd y al cliente que le agregaremos.
-            usuario = Tutor.objects.get(user_id=idUsuario)
-            u = Usuario.objects.get(id=idCliente)
-            # Agregamos al cliente.
-            usuario.usuarios.add(u)
-            # Obtenemos las recetas del nuevo cliente para poder atualizar el acordeón de clientes.
-            recetasUsuario = Usuario.objects.get(id=idCliente).recetas.all()
-            data = {}
-            c = 0
-            for receta in recetasUsuario:
-                data.update({c: {'nombre': receta.nombre, 'id': receta.id}})
-                c += 1
-            return JsonResponse({'data': data}, status=200)
+            if accion == 'agregar-cliente':
+                idCliente = request.POST.get('cliente')
+                idUsuario = request.POST.get('usuario')
+                # Obtenemos al usuario de la bd y al cliente que le agregaremos.
+                usuario = Tutor.objects.get(user_id=idUsuario)
+                u = Usuario.objects.get(id=idCliente)
+                # Agregamos al cliente.
+                usuario.usuarios.add(u)
+                # Obtenemos las recetas del nuevo cliente para poder atualizar el acordeón de clientes.
+                recetasUsuario = Usuario.objects.get(
+                    id=idCliente).recetas.all()
+                data = {}
+                c = 0
+                for receta in recetasUsuario:
+                    data.update(
+                        {c: {'nombre': receta.nombre, 'id': receta.id}})
+                    c += 1
+                return JsonResponse({'data': data}, status=200)
 
-        if accion == 'mostrar-recetas':
-            usuario = request.POST.get('usuario')
-            # Obtenemos al usuario de la bd.
-            id = User.objects.get(username=usuario).id
-            # Obtenemos sus recetas
-            recetasUsuario = Usuario.objects.get(user_id=id).recetas.all()
-            # Obtenemos las recetas que le faltan.
-            recetas = Receta.objects.exclude(id__in=recetasUsuario)
-            # Guardamos la información que regresaremos.
-            data = {}
-            c = 0
-            for receta in recetas:
-                data.update({c: {'nombre': receta.nombre, 'id': receta.id}})
-                c += 1
-            return JsonResponse({'data': data}, status=200)
+            if accion == 'mostrar-recetas':
+                usuario = request.POST.get('usuario')
+                # Obtenemos al usuario de la bd.
+                id = User.objects.get(username=usuario).id
+                # Obtenemos sus recetas
+                recetasUsuario = Usuario.objects.get(user_id=id).recetas.all()
+                # Obtenemos las recetas que le faltan.
+                recetas = Receta.objects.exclude(id__in=recetasUsuario)
+                # Guardamos la información que regresaremos.
+                data = {}
+                c = 0
+                for receta in recetas:
+                    data.update(
+                        {c: {'nombre': receta.nombre, 'id': receta.id}})
+                    c += 1
+                return JsonResponse({'data': data}, status=200)
 
-        if accion == 'agregar-receta':
-            usuario = request.POST.get('usuario')
-            receta = request.POST.get('receta')
-            # Obtenemos al usuario de la bd y la receta que le agregaremos.
-            idUsuario = User.objects.get(username=usuario).id
-            usuario = Usuario.objects.get(user_id=idUsuario)
-            r = Receta.objects.get(id=receta)
-            # Agregamos la receta.
-            usuario.recetas.add(r)
-            return JsonResponse({}, status=200)
+            if accion == 'agregar-receta':
+                usuario = request.POST.get('usuario')
+                receta = request.POST.get('receta')
+                # Obtenemos al usuario de la bd y la receta que le agregaremos.
+                idUsuario = User.objects.get(username=usuario).id
+                usuario = Usuario.objects.get(user_id=idUsuario)
+                r = Receta.objects.get(id=receta)
+                # Agregamos la receta.
+                usuario.recetas.add(r)
+                return JsonResponse({}, status=200)
 
-        if accion == 'eliminar-receta':
-            idUsuario = request.POST.get('usuario')
-            receta = request.POST.get('receta')
-            # Obtenemos al usuario de la bd y la receta que le quitaremos.
-            usuario = Usuario.objects.get(id=idUsuario)
-            r = Receta.objects.get(id=receta)
-            # Eliminamos la receta.
-            usuario.recetas.remove(r)
-            return JsonResponse({}, status=200)
+            if accion == 'eliminar-receta':
+                idUsuario = request.POST.get('usuario')
+                receta = request.POST.get('receta')
+                # Obtenemos al usuario de la bd y la receta que le quitaremos.
+                usuario = Usuario.objects.get(id=idUsuario)
+                r = Receta.objects.get(id=receta)
+                # Eliminamos la receta.
+                usuario.recetas.remove(r)
+                return JsonResponse({}, status=200)
 
-    usuarios = Tutor.objects.get(user_id=request.user.id).usuarios.all()
-    context = {'usuarios': usuarios}
+        usuarios = Tutor.objects.get(user_id=request.user.id).usuarios.all()
+        context.update({'usuarios': usuarios})
 
-    return render(request, 'seeker/esquema-tutor.html', context)
+    else:
+        # Obtenemos las recetas del usuario para mostrarlas en el template.
+        recetas = Usuario.objects.get(user_id=request.user.id).recetas.all()
+        context.update({'recetas': recetas})
 
-
-@login_required(login_url='login')
-@usuarios_permitidos(roles_permitidos=['usuario'])
-def esquema_ul(request):
-    return render(request, 'seeker/esquema-ul.html', {})
+    return render(request, 'seeker/esquema.html', context)
