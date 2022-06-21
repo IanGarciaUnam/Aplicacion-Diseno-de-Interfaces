@@ -2,6 +2,9 @@ from unicodedata import name
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
 from django.views.generic import TemplateView
+from django.conf import settings
+
+from django.template import RequestContext
 
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login, logout
@@ -223,3 +226,8 @@ def esquema(request):
         context.update({'recetas': recetas})
 
     return render(request, 'seeker/esquema.html', context)
+
+def handler404(request, *args, **argv):
+    response = render(request, 'seeker/404.html', {})
+    response.status_code = 404
+    return response
