@@ -1,0 +1,24 @@
+<div class="row justify-content-center">
+  <div class="col-4 col-lg-2">
+    <select class="form-select" aria-label="Default select example">
+      <option value="alimento">Alimento</option>
+      <option value="receta">Receta</option>
+    </select>
+  </div>
+  <div class="col-7 col-lg-6">
+    <input class="form-control me-2" id="busqueda" type="search" placeholder="Search" aria-label="Search">
+  </div>
+</div>
+
+<script>
+  $('#busqueda').keydown(function(e) {
+    if (e.keyCode == 13) {
+      let tipo = $('select').val();
+      if (tipo == 'alimento') {
+        window.location.href = '/results?tipo=alimento&alimento=de';
+      } else {
+        window.location.href = '/results?tipo=receta&receta=de';
+      }
+    }
+  })
+</script>

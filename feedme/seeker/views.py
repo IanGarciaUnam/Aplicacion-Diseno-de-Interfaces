@@ -78,15 +78,38 @@ def reset_pass(request):
     return render(request, 'seeker/reset-pass.html', {})
 
 
+@csrf_exempt
 def results_no_login(request):
-    # key=request.GET.get('buscar','')
-    # print(key)
-    # response = requests.get('https://api.edamam.com/api/nutrition-data?app_id=c933683d&app_key=5eae2dcc11aa5945fbf7d51d849af20d&nutrition-type=cooking&ingr='+'buscar')
-    # Tranformamos la respuesta en un objeto JSON
-    # todos = response.json()
-    # print(todos)
-    todos = {}
-    return render(request, 'seeker/results-nl.html', {'results': todos})
+    context = {}
+    if request.method == 'GET' and request.GET.get('tipo') != None:
+        tipo = request.GET.get('tipo')
+        key = ''
+        resultados = None
+        if tipo == 'alimento':
+            key = request.GET.get('alimento')
+            resultados = Alimento.objects.filter(nombre__icontains=key)
+        else:
+            key = request.GET.get('receta')
+            resultados = Receta.objects.filter(nombre__icontains=key)
+
+        context = {'resultados': resultados, 'tipo': tipo}
+
+    if request.method == 'POST':
+        accion = request.POST.get('accion')
+
+        if accion == 'mostrar-alimento':
+            idAlimento = request.POST.get('alimento')
+            # Obtenemos el alimento.
+            alimento = Alimento.objects.get(id=idAlimento)
+            data = {
+                'nombre': alimento.nombre,
+                'calorias': alimento.calorias,
+                'grasas': alimento.grasas,
+                'proteina': alimento.proteina,
+            }
+            return JsonResponse({'data': data}, status=200)
+    
+    return render(request, 'seeker/results.html', context)
 
 
 def receta(request):

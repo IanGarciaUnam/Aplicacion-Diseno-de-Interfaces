@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+{% block content %}
+<div id="main" class="h-100 ">
+
+  <!-- Modal HTML -->
+  <div id="modal-alimento" class="modal fade" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header" style="background-color: #F29D4B ;">
+          <h5 class="modal-title"></h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <!-- Insert table-->
+          <div class="table-responsive sm">
+            <table class="table" id="tabla-info">
+              <tbody>
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+        <!--div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div-->
+      </div>
+    </div>
+  </div>
+
+  <div id="nl" class="container-fluid h-100 w-75">
+    <h1 class="text-dark fw-bold mx-auto my-5">Resultados de búsqueda</h1>
+    {% include 'seeker/seeker.html' %}
+    <div class="table-responsive-lg table-borderless my-5">
+      <table class="table table-light table-hover">
+        <thead class="thead-light">
+          <tr class="table-light">
+            <th class="py-1"></th>
+          </tr>
+        </thead>
+        <tbody>
+          {% if tipo == 'alimento' %}
+          <h2 class="m-0">Alimentos</h2>
+          {% for alimento in resultados %}
+          <tr>
+            <td>
+              <a href="#modal-alimento" role="button" class="h-100
+              w-100  border border-secondary btn-lg btn-block card-button btn btn-light btn-alimento"
+                data-bs-toggle="modal" data-alimento="{{ alimento.id }}">
+                {{ alimento.nombre }}
+              </a>
+            </td>
+          </tr>
+          {% endfor %}
+          {% else %}
+          <h2 class="m-0">Recetas</h2>
+          {% for receta in resultados %}
+          <tr>
+            <td>
+              <a href="/receta?nombre={{ receta.url_readable_title }}" role="button"
+                class="h-100 w-100 border border-secondary btn-lg btn-block card-button btn btn-light">
+                {{ receta.nombre }}
+              </a>
+            </td>
+          </tr>
+          {% endfor %}
+          {% endif %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<script>
+  $(document).ready(function () {
+    // Obtenemos las recetas que no tiene el usuario enviado para mostrarlas en la modal.
+    $(document).on('click', '.btn-alimento', function () {
+      let btn = $(this);
+      $.post("/results", {
+        'accion': 'mostrar-alimento',
+        'alimento': btn.data('alimento')
+      }, function (res) {
+        let info = res.data;
+        console.log(info);
+        // Actualizamos la información del alimento que se mostrará.
+        $('.modal-title').html(info.nombre);
+        $('#tabla-info').find('tbody').html('');
+        $('#tabla-info').find('tbody').append(
+          '<tr>' +
+            '<th scope="row">' +
+              'Calorías' +
+            '</th>' +
+            '<td>' + info.calorias + ' cal</td>' +
+          '</tr>' +
+          '<tr>' +
+            '<th scope="row">' +
+              'Grasas' +
+            '</th>' +
+            '<td>' + info.grasas + ' mcg</td>' +
+          '</tr>' +
+          '<tr>' +
+            '<th scope="row">' +
+              'Proteína' +
+            '</th>' +
+            '<td>' + info.proteina + ' g</td>' +
+          '</tr>'
+        );
+      });
+    });
+  });
+</script>
+{% endblock content %}
