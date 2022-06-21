@@ -1,16 +1,36 @@
-# Aplicacion-Diseno-de-Interfaces
-Repositorio para la aplicación, FeedMe. Diseño de Interfaces de Usuario,.
+# Aplicación: FeedMe
 
-### Ian Israel García Vázquez
+Diseño de Interfaces de Usuario.
 
-Durante esta última semana me encargue de la definición de paleta de colores para la aplicación y para la empresa, imagotipo de la empresa, imagotipo de la app y el diseño del manual de identidad.
-Asimismo de la correción de los anteriores y la elaboración de un nuevo manual de identidad.
-Por otro lado cooperé en la creación de wireframes y la definición de algunos casos de uso. 
+### Integrantes
 
-### Armando Ramírez González
+- Ian Israel García Vázquez
 
-Encargado de coordinar el equipo así como el Tablero de Trello correspondiente. Encargado de revisar esta semana el logotipo para la empresa y de la aplicación, a la par, trabajando en los mockups que ayudarán en la creación del prototipo de la aplicación.
+- Armando Ramírez González
 
-### Luis Alberto Hernández Aguilar
+- Luis Alberto Hernández Aguilar
 
-Encargado de correción y elaboración de mockups para el diseño de la aplicación y apoyo en la definición de paletas de colores para los logos de la empresa y de la aplicación.
+### Para clonar el repositorio
+
+```
+git clone https://github.com/Armando122/Aplicacion-Diseno-de-Interfaces.git
+```
+
+### Ejecución del proyecto
+
+Para ejecutar el proyecto, es necesario contar con a versión 3 de python, para instalarla es necesario hacer:
+
+```
+sudo apt-get install python3.7
+```
+
+Así como contar con Django, que se puede instalar de la siguiente manera: 
+
+```
+pip install Django==4.0.5
+```
+
+Una vez instalado es necesario colocarse en la carpeta `feedme` y ejecutar el siguiente comando:
+
+```
+python3 manage.py runserver
