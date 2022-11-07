@@ -1,14 +1,55 @@
 <div class="row justify-content-center">
-  <div class="col-4 col-lg-2">
+
+
+  <!--div class="col-4 col-lg-6">
     <select class="form-select" aria-label="Default select example">
-      <option value="alimento">Alimento</option>
-      <option value="receta">Receta</option>
-    </select>
-  </div>
-  <div class="col-7 col-lg-6">
-    <input class="form-control me-2" id="busqueda" type="search" placeholder="Search" aria-label="Search">
-  </div>
+      <option value="Lugar">Lugar</option>
+      {% for lugar in resultados %}
+      <option value="{{ lugar.id }}">{{ lugar.nombre }}</option>
+      {%endfor%}
+    </select-->
+<!--div class="col-7 col-lg-2">
+<select class="form-select" aria-label="Default select example">
+  <option value="Seccion">Sección</option>
+</select>
 </div>
+</div>
+</div-->
+
+
+<div class="col-4 col-lg-6">
+  <select class="form-select" aria-label="Default select example">
+    <option value="Lugar">Lugar</option>
+
+            {% for edificio in lugares %}
+
+    <option value="{{ lugar.id }}">{{ edificio.nombre.nombre }} {{edificio.nombre_edificio}} Piso :{{edificio.piso}}</option>
+
+    {% endfor %}
+
+  </select>
+
+<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+  <li class="dropdown-submenu">
+  {% for lugar in resultados %}
+    <a tabindex="{{lugar.id}}" href="/results?{{lugar.nombre}}">{{lugar.nombre}}</a>
+  {% for edificio in lugares %}
+      <ul class="dropdown-menu">
+        {% if edificio.nombre is lugar %}
+          {{edificio.nombre_edificio}}
+          {% endif %}
+
+
+      </ul>
+      {% endfor %}
+    {% endfor %}
+  </li>
+</ul>
+
+</div>
+
+</div>
+
 
 <script>
   $('#busqueda').keydown(function(e) {
@@ -16,9 +57,10 @@
       let tipo = $('select').val();
       if (tipo == 'alimento') {
         window.location.href = '/results?tipo=alimento&alimento=de';
-      } else {
-        window.location.href = '/results?tipo=receta&receta=de';
       }
+      /*else {
+        window.location.href = '/results?tipo=receta&receta=de';
+      }*/
     }
   })
 </script>

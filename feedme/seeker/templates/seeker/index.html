@@ -38,7 +38,7 @@
 <div id="main">
   <div id="seeker" class="container-fluid">
     <h1 class="text-white fw-bold mx-auto">Mantente seguro</h1>
-    <p class="text-white mx-auto mb-lg-5 mb-4">Donde quiera que estés</p>
+    <p class="text-black mx-auto mb-lg-5 mb-4">Donde quiera que estés</p>
 
 
 
@@ -64,23 +64,8 @@
     </script>
 
 
+ {% include 'seeker/seeker.html' %}
 
-    <div class="row justify-content-center">
-  <div class="col-4 col-lg-2">
-    <select class="form-select" aria-label="Default select example">
-      <option value="Lugar">Lugar</option>
-      {% for lugar in resultados %}
-      <option value="{{ lugar.id }}">{{ lugar.nombre }}</option>
-      {%endfor%}
-    </select>
-  </div>
-  <div class="col-7 col-lg-2">
-    <select class="form-select" aria-label="Default select example">
-      <option value="Planta baja">Sección</option>
-      <option value="Piso 1">Piso 1</option>
-    </select>
-  </div>
-</div>
 
 <script>
   $('#busqueda').keydown(function(e) {

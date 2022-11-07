@@ -51,9 +51,16 @@ def index(request):
     p_1.save()
     p_2=Edificio_Piso(nombre=r,nombre_edificio="Edificio P", piso="2")
     p_2.save()
-    resultados=Lugar.objects.all();
 
-    context={'resultados':resultados}
+    encit= Lugar(nombre="(ENCIT) Escuela Nacional de Ciencias de la Tierra", direccion="Parque de los bigotes, C.U., Coyoacán, 04510 Ciudad de México, CDMX" , instrucciones_salida="Desciende las escaleras\n Dirigete a la zona de reunión en la planta baja")
+    encit.save()
+    en_1=Edificio_Piso(nombre=encit, nombre_edificio="Principal", piso="Planta Baja")
+    en_2=Edificio_Piso(nombre=encit, nombre_edificio="Principal", piso="1")
+    en_1.save()
+    en_2.save()
+    resultados=Lugar.objects.all();
+    lugares= Edificio_Piso.objects.all()
+    context={'resultados':resultados, "lugares":lugares}
     print(resultados)
     return render(request, 'seeker/index.html', context)
 
