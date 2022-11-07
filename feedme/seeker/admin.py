@@ -4,6 +4,7 @@ from django.contrib import admin
 
 from .models import *
 
+admin.site.register(Lugar)
 admin.site.register(Alimento)
 admin.site.register(Receta)
 admin.site.register(Ingrediente)

@@ -2,6 +2,17 @@ from django.db import models
 from django.contrib.auth.models import User
 # Create your models here.
 
+class Lugar(models.Model):
+    nombre = models.CharField(max_length=200,null=True)
+    direccion = models.CharField(max_length=500, null=True)
+    instrucciones_salida= models.TextField(blank=True);
+
+class Edificio_Piso(models.Model):
+    nombre=models.ForeignKey(Lugar,on_delete=models.CASCADE)
+    nombre_edificio=models.CharField(max_length=200,null=True)
+    piso=models.CharField(max_length=200,null=True)
+
+
 class Alimento(models.Model):
     nombre = models.CharField(max_length=200, null=True)
     calorias = models.FloatField(null=True)
@@ -18,7 +29,7 @@ class Receta(models.Model):
     nombre = models.CharField(max_length=200, null=True)
     preparacion = models.TextField(null=True)
     fecha_creacion = models.DateTimeField(auto_now_add=True, null=True)
-    
+
     def __str__(self):
         return self.nombre
 

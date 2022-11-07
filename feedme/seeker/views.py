@@ -24,8 +24,38 @@ class HomeView(TemplateView):
     template_name = 'index.html'
 
 
+def get_coordinates():
+    pass
+
 def index(request):
-    return render(request, 'seeker/index.html', {})
+    Lugar.objects.all().delete();
+    r= Lugar(nombre="Facultad de Ciencias", direccion="Investigación Científica, C.U., Coyoacán, 04510 Ciudad de México, CDMX", instrucciones_salida="Toma la salida más cercana \n Descience por las escaleras hasta la planta baja \n En la salida izquierda encontrarás el punto de reunión más cercano");
+    r.save()
+    tlahuizcalpan0=Edificio_Piso(nombre=r,nombre_edificio="Tlahuizcalpan", piso="Planta Baja")
+    tlahuizcalpan1=Edificio_Piso(nombre=r,nombre_edificio="Tlahuizcalpan", piso="1")
+    tlahuizcalpan2=Edificio_Piso(nombre=r,nombre_edificio="Tlahuizcalpan", piso="2")
+    tlahuizcalpan3=Edificio_Piso(nombre=r,nombre_edificio="Tlahuizcalpan", piso="3")
+    tlahuizcalpan0.save()
+    tlahuizcalpan1.save()
+    tlahuizcalpan2.save()
+    tlahuizcalpan3.save()
+    o_0=Edificio_Piso(nombre=r,nombre_edificio="Edificio O", piso="Planta Baja")
+    o_0.save()
+    o_1=Edificio_Piso(nombre=r,nombre_edificio="Edificio O", piso="1")
+    o_1.save()
+    o_2=Edificio_Piso(nombre=r,nombre_edificio="Edificio O", piso="2")
+    o_2.save()
+    p_0=Edificio_Piso(nombre=r,nombre_edificio="Edificio P", piso="Planta Baja")
+    p_0.save()
+    p_1=Edificio_Piso(nombre=r,nombre_edificio="Edificio P", piso="1")
+    p_1.save()
+    p_2=Edificio_Piso(nombre=r,nombre_edificio="Edificio P", piso="2")
+    p_2.save()
+    resultados=Lugar.objects.all();
+
+    context={'resultados':resultados}
+    print(resultados)
+    return render(request, 'seeker/index.html', context)
 
 
 @usuario_no_autenticado
@@ -111,7 +141,7 @@ def results_no_login(request):
                 'proteina': alimento.proteina,
             }
             return JsonResponse({'data': data}, status=200)
-    
+
     return render(request, 'seeker/results.html', context)
 
 

@@ -27,4 +27,5 @@ class Migration(migrations.Migration):
                 ('calorias', models.FloatField()),
             ],
         ),
+
     ]
