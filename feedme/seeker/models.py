@@ -5,14 +5,20 @@ from django.contrib.auth.models import User
 class Lugar(models.Model):
     nombre = models.CharField(max_length=200,null=True)
     direccion = models.CharField(max_length=500, null=True)
-    instrucciones_salida= models.TextField(blank=True);
+
+    def __str__(self):
+        return self.nombre
 
 class Edificio_Piso(models.Model):
     nombre=models.ForeignKey(Lugar,on_delete=models.CASCADE)
     nombre_edificio=models.CharField(max_length=200,null=True)
     piso=models.CharField(max_length=200,null=True)
+    instrucciones_salida= models.TextField(blank=True);
 
-
+    def __str__(self):
+        return str(self.nombre)+","+self.nombre_edificio+","+str(self.piso)
+    def get_instrucciones_salida(self):
+        return self.instrucciones_salida.split("\n")
 class Alimento(models.Model):
     nombre = models.CharField(max_length=200, null=True)
     calorias = models.FloatField(null=True)

@@ -29,33 +29,32 @@ def get_coordinates():
 
 def index(request):
     Lugar.objects.all().delete();
-    r= Lugar(nombre="Facultad de Ciencias", direccion="Investigación Científica, C.U., Coyoacán, 04510 Ciudad de México, CDMX", instrucciones_salida="Toma la salida más cercana \n Descience por las escaleras hasta la planta baja \n En la salida izquierda encontrarás el punto de reunión más cercano");
+    r= Lugar(nombre="Facultad de Ciencias", direccion="Investigación Científica, C.U., Coyoacán, 04510 Ciudad de México, CDMX");
     r.save()
-    tlahuizcalpan0=Edificio_Piso(nombre=r,nombre_edificio="Tlahuizcalpan", piso="Planta Baja")
-    tlahuizcalpan1=Edificio_Piso(nombre=r,nombre_edificio="Tlahuizcalpan", piso="1")
-    tlahuizcalpan2=Edificio_Piso(nombre=r,nombre_edificio="Tlahuizcalpan", piso="2")
-    tlahuizcalpan3=Edificio_Piso(nombre=r,nombre_edificio="Tlahuizcalpan", piso="3")
+    tlahuizcalpan0=Edificio_Piso(nombre=r,nombre_edificio="Tlahuizcalpan", piso="Planta Baja", instrucciones_salida="Toma la salida más cercana \n Si te encuentras cerca al árbol central, repliegate a las paredes \n Mantente alejado de vidrios, ventanas u objetos que puedan caer o volcarse \n Manten la calma")
+    tlahuizcalpan1=Edificio_Piso(nombre=r,nombre_edificio="Tlahuizcalpan", piso="1", instrucciones_salida="Toma la salida más cercana de tu lado izquierdo \n Dirigete al busto de Darwin (entrada principal) \n En la salida izquierda encontrarás el punto de reunión más cercano \n Espera instrucciones del personal de protección civil o personal capacitado \n Manten la calma")
+    tlahuizcalpan2=Edificio_Piso(nombre=r,nombre_edificio="Tlahuizcalpan", piso="2", instrucciones_salida="Desciende al primer piso \n Dirigete al busto de Darwin (entrada principal) \n En la salida izquierda encontrarás el punto de reunión más cercano \n Espera instrucciones del personal de protección civil o personal capacitado \n Manten la calma")
+    tlahuizcalpan3=Edificio_Piso(nombre=r,nombre_edificio="Tlahuizcalpan", piso="3",instrucciones_salida="Desciende al primer piso \n Dirigete al busto de Darwin (entrada principal) \n En la salida izquierda encontrarás el punto de reunión más cercano \n Espera instrucciones del personal de protección civil o personal capacitado \n Manten la calma")
     tlahuizcalpan0.save()
     tlahuizcalpan1.save()
     tlahuizcalpan2.save()
     tlahuizcalpan3.save()
-    o_0=Edificio_Piso(nombre=r,nombre_edificio="Edificio O", piso="Planta Baja")
+    o_0=Edificio_Piso(nombre=r,nombre_edificio="Edificio O", piso="Planta Baja", instrucciones_salida="Dirigete a alguna de salidas con dirección al estacionamiento de profesores (a mano derecha de las escaleras si te encuentras por la entrada P cercana a la librería, izquierda en caso de encontrarte cerca de la papelería) \n ubica el punto de reunión más cercano en el estacionamiento \n Espera instrucciones del personal de protección civil ")
     o_0.save()
-    o_1=Edificio_Piso(nombre=r,nombre_edificio="Edificio O", piso="1")
+    o_1=Edificio_Piso(nombre=r,nombre_edificio="Edificio O", piso="1",instrucciones_salida="Toma las escaleras de salida más cercanas, si te encuentras en los números de salón 100 al 111, dirigete a tu mano derecha, en caso contrario a la izquierda \n En la planta baja, diregete a alguna de salidas con dirección al estacionamiento principal \n ubica el punto de reunión más cercano en el estacionamiento \n Espera instrucciones del personal de protección civil ")
     o_1.save()
-    o_2=Edificio_Piso(nombre=r,nombre_edificio="Edificio O", piso="2")
+    o_2=Edificio_Piso(nombre=r,nombre_edificio="Edificio O", piso="2", instrucciones_salida="Toma las escaleras de salida más cercanas, si te encuentras en los números de salón 200 al 211, dirigete a tu mano derecha, en caso contrario a la izquierda \n En la planta baja, diregete a alguna de salidas con dirección al estacionamiento principal \n ubica el punto de reunión más cercano en el estacionamiento \n Espera instrucciones del personal de protección civil ")
     o_2.save()
-    p_0=Edificio_Piso(nombre=r,nombre_edificio="Edificio P", piso="Planta Baja")
+    p_0=Edificio_Piso(nombre=r,nombre_edificio="Edificio P", piso="Planta Baja", instrucciones_salida="Dirigete a alguna de salidas con dirección al estacionamiento de profesores (a mano derecha de las escaleras si te encuentras por la entrada P cercana a la librería, izquierda en caso de encontrarte cerca de la papelería) \n ubica el punto de reunión más cercano en el estacionamiento \n Espera instrucciones del personal de protección civil")
     p_0.save()
-    p_1=Edificio_Piso(nombre=r,nombre_edificio="Edificio P", piso="1")
+    p_1=Edificio_Piso(nombre=r,nombre_edificio="Edificio P", piso="1", instrucciones_salida="Toma las escaleras de salida más cercanas, si te encuentras en los números de salón 100 al 111, dirigete a tu mano derecha, en caso contrario a la izquierda \n En la planta baja, diregete a alguna de salidas con dirección al estacionamiento principal \n ubica el punto de reunión más cercano en el estacionamiento \n Espera instrucciones del personal de protección civil ")
     p_1.save()
-    p_2=Edificio_Piso(nombre=r,nombre_edificio="Edificio P", piso="2")
+    p_2=Edificio_Piso(nombre=r,nombre_edificio="Edificio P", piso="2",instrucciones_salida="Toma las escaleras de salida más cercanas, si te encuentras en los números de salón 200 al 211, dirigete a tu mano derecha, en caso contrario a la izquierda \n En la planta baja, diregete a alguna de salidas con dirección al estacionamiento principal \n ubica el punto de reunión más cercano en el estacionamiento \n Espera instrucciones del personal de protección civil ")
     p_2.save()
-
-    encit= Lugar(nombre="(ENCIT) Escuela Nacional de Ciencias de la Tierra", direccion="Parque de los bigotes, C.U., Coyoacán, 04510 Ciudad de México, CDMX" , instrucciones_salida="Desciende las escaleras\n Dirigete a la zona de reunión en la planta baja")
+    encit= Lugar(nombre="(ENCIT) Escuela Nacional de Ciencias de la Tierra", direccion="Parque de los bigotes, C.U., Coyoacán, 04510 Ciudad de México, CDMX")
     encit.save()
-    en_1=Edificio_Piso(nombre=encit, nombre_edificio="Principal", piso="Planta Baja")
-    en_2=Edificio_Piso(nombre=encit, nombre_edificio="Principal", piso="1")
+    en_1=Edificio_Piso(nombre=encit, nombre_edificio="Principal", piso="Planta Baja", instrucciones_salida="Desciende las escaleras\n Dirigete a la zona de reunión  \n Espera instrucciones del personal de protección civil")
+    en_2=Edificio_Piso(nombre=encit, nombre_edificio="Principal", piso="1", instrucciones_salida="Desciende las escaleras\n Dirigete a la zona de reunión en la planta baja \n Espera instrucciones del personal de protección civil")
     en_1.save()
     en_2.save()
     resultados=Lugar.objects.all();
@@ -121,9 +120,26 @@ def reset_pass(request):
 @csrf_exempt
 def results_no_login(request):
     context = {}
-    if request.method == 'GET' and request.GET.get('tipo') != None:
-        tipo = request.GET.get('tipo')
-        key = ''
+    lugares=None
+    instrucciones=""
+    if request.method == 'GET' and request.GET.get('id') != None:
+        id = request.GET.get('id')
+        if len(str(id))>10:
+            return  redirect('/')
+        print(id)
+        #Class.objects.get(pk=this_object_id)
+        try:
+            edificio_piso = Edificio_Piso.objects.get(pk=id)
+            lugares=Edificio_Piso.objects.all()
+            print(edificio_piso)
+            print(edificio_piso.get_instrucciones_salida())
+            instrucciones=edificio_piso.get_instrucciones_salida()
+            context={'instrucciones':instrucciones,'lugar':edificio_piso ,'lugares':lugares, 'id_selected':id}
+            #return render(request, 'seeker/404.html', context)
+        except:
+            return render(request, 'seeker/404.html')
+
+        """
         resultados = None
         if tipo == 'alimento':
             key = request.GET.get('alimento')
@@ -136,7 +152,6 @@ def results_no_login(request):
 
     if request.method == 'POST':
         accion = request.POST.get('accion')
-
         if accion == 'mostrar-alimento':
             idAlimento = request.POST.get('alimento')
             # Obtenemos el alimento.
@@ -148,7 +163,7 @@ def results_no_login(request):
                 'proteina': alimento.proteina,
             }
             return JsonResponse({'data': data}, status=200)
-
+            """
     return render(request, 'seeker/results.html', context)
 
 

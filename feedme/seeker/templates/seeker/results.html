@@ -28,7 +28,7 @@
   </div>
 
   <div id="nl" class="container-fluid h-100 w-75">
-    <h1 class="text-dark fw-bold mx-auto my-5">Resultados de búsqueda</h1>
+    <h1 class="text-dark fw-bold mx-auto my-5">Instrucciones de evacuación</h1>
     {% include 'seeker/seeker.html' %}
     <div class="table-responsive-lg table-borderless my-5">
       <table class="table table-light table-hover">
@@ -38,74 +38,55 @@
           </tr>
         </thead>
         <tbody>
-          {% if tipo == 'lugar' %}
-          <h2 class="m-0">Alimentos</h2>
-          {% for alimento in resultados %}
+          <h2 class="m-0">{{lugar.nombre.nombre}}, {{lugar.nombre_edificio}},  Piso/Sección: {{lugar.piso}}</h2>
+          {% for linea in instrucciones %}
           <tr>
             <td>
               <a href="#modal-alimento" role="button" class="h-100
               w-100  border border-secondary btn-lg btn-block card-button btn btn-light btn-alimento"
                 data-bs-toggle="modal" data-alimento="{{ alimento.id }}">
-                {{ alimento.nombre }}
+                {{ linea }}
               </a>
             </td>
           </tr>
           {% endfor %}
-          {% else %}
-          <h2 class="m-0">Recetas</h2>
-          {% for receta in resultados %}
-          <tr>
-            <td>
-              <a href="/receta?nombre={{ receta.url_readable_title }}" role="button"
-                class="h-100 w-100 border border-secondary btn-lg btn-block card-button btn btn-light">
-                {{ receta.nombre }}
-              </a>
-            </td>
-          </tr>
-          {% endfor %}
-          {% endif %}
         </tbody>
       </table>
     </div>
-  </div>
-</div>
 
-<script>
-  $(document).ready(function () {
-    // Obtenemos las recetas que no tiene el usuario enviado para mostrarlas en la modal.
-    $(document).on('click', '.btn-alimento', function () {
-      let btn = $(this);
-      $.post("/results", {
-        'accion': 'mostrar-alimento',
-        'alimento': btn.data('alimento')
-      }, function (res) {
-        let info = res.data;
-        console.log(info);
-        // Actualizamos la información del alimento que se mostrará.
-        $('.modal-title').html(info.nombre);
-        $('#tabla-info').find('tbody').html('');
-        $('#tabla-info').find('tbody').append(
-          '<tr>' +
-            '<th scope="row">' +
-              'Calorías' +
-            '</th>' +
-            '<td>' + info.calorias + ' cal</td>' +
-          '</tr>' +
-          '<tr>' +
-            '<th scope="row">' +
-              'Grasas' +
-            '</th>' +
-            '<td>' + info.grasas + ' mcg</td>' +
-          '</tr>' +
-          '<tr>' +
-            '<th scope="row">' +
-              'Proteína' +
-            '</th>' +
-            '<td>' + info.proteina + ' g</td>' +
-          '</tr>'
-        );
+  <!--div id="map-container-google-1" class="z-depth-1-half map-container" style="height: 500px">
+    <iframe src="http://www.bing.com/api/maps/mapcontrol?callback=GetMap"
+      frameborder="0" style="border:0" allowfullscreen></iframe>
+  </div-->
+
+     <div id="myMap" class="col 8" style="position:relative;width:500px;height:300px;"></div>
+  </div>
+
+
+</div>
+<script type="text/javascript">
+  function GetMap() {
+      var map = new Microsoft.Maps.Map('#myMap', {
+          credentials: 'AmeApjr9qdBM_yl7So2TgezVPHtZL85cLy47q3pmoMq9bCh0kK7t28SN8acTNyPt'
       });
-    });
-  });
-</script>
+
+      //Request the user's location
+      navigator.geolocation.getCurrentPosition(function (position) {
+          var loc = new Microsoft.Maps.Location(
+              position.coords.latitude,
+              position.coords.longitude);
+              console.log(position.coords.latitude+","+position.coords.longitude)
+
+          //Add a pushpin at the user's location.
+          var pin = new Microsoft.Maps.Pushpin(loc);
+          map.entities.push(pin);
+
+          //Center the map on the user's location.
+          map.setView({ center: loc, zoom: 15 });
+      });
+  }
+  </script>
+   <script type='text/javascript' src='http://www.bing.com/api/maps/mapcontrol?callback=GetMap' async defer></script>
+
+
 {% endblock content %}

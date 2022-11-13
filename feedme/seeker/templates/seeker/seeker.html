@@ -17,50 +17,55 @@
 </div-->
 
 
-<div class="col-4 col-lg-6">
-  <select class="form-select" aria-label="Default select example">
-    <option value="Lugar">Lugar</option>
+<div class="col-12 col-md-8">
+  <select class="form-select" aria-label="Default select example" placeholder="Lugar">
+    <option>Selecciona el lugar donde te encuentre o desees conocer</option>
 
-            {% for edificio in lugares %}
-
-    <option value="{{ lugar.id }}">{{ edificio.nombre.nombre }} {{edificio.nombre_edificio}} Piso :{{edificio.piso}}</option>
-
+    {% for edificio in lugares %}
+    {%if edificio.id == id_selected %}
+    <option selected value="{{ edificio.id }}">{{edificio.nombre.nombre }} {{edificio.nombre_edificio}}  Piso: {{edificio.piso}}</option>
+    {%else%}
+    <option value="{{ edificio.id }}">
+      {{edificio.nombre.nombre }} {{edificio.nombre_edificio}}  Piso: {{edificio.piso}}
+      </option>
+    {%endif%}
     {% endfor %}
+
 
   </select>
 
-<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-  <li class="dropdown-submenu">
-  {% for lugar in resultados %}
-    <a tabindex="{{lugar.id}}" href="/results?{{lugar.nombre}}">{{lugar.nombre}}</a>
-  {% for edificio in lugares %}
-      <ul class="dropdown-menu">
-        {% if edificio.nombre is lugar %}
-          {{edificio.nombre_edificio}}
-          {% endif %}
 
 
-      </ul>
-      {% endfor %}
-    {% endfor %}
-  </li>
-</ul>
+
 
 </div>
 
+
+<div class="col col-lg-2">
+<button id = "srch_button" type="button" onclick="redirect()" class="btn btn-primary fw-bold">
+    Buscar
+</button>
 </div>
+
+
+
+</div>
+
+
 
 
 <script>
-  $('#busqueda').keydown(function(e) {
-    if (e.keyCode == 13) {
-      let tipo = $('select').val();
-      if (tipo == 'alimento') {
-        window.location.href = '/results?tipo=alimento&alimento=de';
-      }
-      /*else {
-        window.location.href = '/results?tipo=receta&receta=de';
-      }*/
-    }
-  })
+
+  function redirect(){
+    let id = $('select').val();
+    console.log(id);
+    window.location.href = '/results?id='+id;
+  }
+
+  document.getElementById("srch_button").onclick = function() {
+redirect()
+  };
+
+
+
 </script>
