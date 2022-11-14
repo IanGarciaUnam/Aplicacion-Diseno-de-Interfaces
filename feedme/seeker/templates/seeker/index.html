@@ -1,7 +1,7 @@
 <html lang="en"><head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Localizer</title>
+    <title>sisMe</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
@@ -20,15 +20,16 @@
   <div class="container-fluid">
     <a class="navbar-brand" href="/">
 
-      <img src="/static/dj_app/media/feedmeA-.png" alt="Localizer" style="width:110px;height:42px;">
+      <img src="/static/dj_app/media/feedmeA-.png" alt="sisMe" style="width:110px;height:42px;">
     </a>
 
 
-    <button type="button" class="btn btn-blue fw-bold" onclick="getlocation()">Encuentrate</button>
-    <a href="/login">
+    <!--button type="button" class="btn btn-green fw-bold" onclick="getlocation()">Encuentrate</button-->
+    <a href="">
       <!--button type="button" class="btn btn-green fw-bold">
         Iniciar Sesión
       </button-->
+      <button type="button" class="btn btn-green fw-bold" onclick="getlocation()">Encuentrate</button>
     </a>
 
 
@@ -43,7 +44,7 @@
 
 
     <p id ="location" class="text-sm text-light bg-dark  mx-auto mb-lg-5 mb-4 location"></p>
-    <script>
+    <!--script>
         var x= document.getElementById("location");
 
         window.onpageshow = function getlocation() {
@@ -69,7 +70,7 @@
       var x = "Te encuentras en (" + "Latitud: " + position.coords.latitude + ", " + "Longitud: " +    position.coords.longitude + ")";
                document.getElementById("location").innerHTML = x;
       }
-    </script>
+    </script-->
 
 
  {% include 'seeker/seeker.html' %}
@@ -95,25 +96,52 @@
         <img src="/static/img/IGEO2.jpg" alt="Chica sandía" width="100%">
       </div>
       <div class="col text-center d-flex">
-        <div class="container align-self-center" id="invitacion-registro">
-          <h2 class="mb-lg-4 mb-3">Accede a las rutas de evacuación, incluso en medio de una emergencia</h2>
+        <!--div class="container align-self-center" id="invitacion-registro"-->
+        <div id="myMap" class="container align-self-center" style="position:relative;width:95%;height:300px;"></div>
+
+          <!--h2 class="mb-lg-4 mb-3">Accede a las rutas de evacuación, incluso en medio de una emergencia</h2-->
           <!--p class="row text-center  mb-lg-4 mb-3">El sistema de prevención y acción más seguro</p-->
-          <a href="/register">
+          <!--a href="/register">
             <button type="button" class="btn btn-green fw-bold">
               Regístrate
             </button>
-          </a>
+          </a-->
         </div>
       </div>
     </div>
   </div>
 </div>
+<script type="text/javascript">
+  function GetMap() {
+      var map = new Microsoft.Maps.Map('#myMap', {
+          credentials: 'AmeApjr9qdBM_yl7So2TgezVPHtZL85cLy47q3pmoMq9bCh0kK7t28SN8acTNyPt'
+      });
+
+      //Request the user's location
+      navigator.geolocation.getCurrentPosition(function (position) {
+          var loc = new Microsoft.Maps.Location(
+              position.coords.latitude,
+              position.coords.longitude);
+              console.log(position.coords.latitude+","+position.coords.longitude)
+
+          //Add a pushpin at the user's location.
+          var pin = new Microsoft.Maps.Pushpin(loc);
+          map.entities.push(pin);
+
+          //Center the map on the user's location.
+          map.setView({ center: loc, zoom: 15 });
+          var x = "Te encuentras en (" + "Latitud: " + position.coords.latitude + ", " + "Longitud: " +    position.coords.longitude + ")";
+                   document.getElementById("location").innerHTML = x;
+      });
+  }
+  </script>
+   <script type='text/javascript' src='http://www.bing.com/api/maps/mapcontrol?callback=GetMap' async defer></script>
 
     <!-- Footer -->
     <nav id="footer" class="navbar navbar-expand-lg navbar-light p-3">
       <div class="container-fluid">
-        <p class="m-0">Sitio diseñado y desarrollado por DING | Todos los derechos reservados</p>
-        <p class="m-0"><a class="text-dark text-decoration-none" href="/#">Aviso de privacidad</a> | <a class="text-dark text-decoration-none" href="/#">Términos y Condiciones</a></p>
+        <p class="m-0">Sitio diseñado y desarrollado por The dangerous | Todos los derechos reservados</p>
+        <!--p class="m-0"><a class="text-dark text-decoration-none" href="/#">Aviso de privacidad</a> | <a class="text-dark text-decoration-none" href="/#">Términos y Condiciones</a></p-->
       </div>
     </nav>
 
